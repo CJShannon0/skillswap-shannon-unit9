@@ -2,24 +2,6 @@ import {filterSkillsByCategory,calculateTotalCost, matchSkillsToUser} from "./sk
 
 let skillList = [];
 
-async function displaySkills(container, skillArray) {
-        container.innerHTML = "";
-
-        skillArray.forEach((skill) => {
-        container.insertAdjacentHTML("beforeend",
-            `<article class="skill-card" tabindex="0">
-                    <button class="skill-card-collapse" type="button" aria-label="Hide offering">&minus;</button>
-                    <div class="skill-card-content" id="${skill.provider}-${skill.title}">
-                        <h3>${skill.title}</h3>
-                        <p class="skill-card-details"><strong>Category:</strong> ${skill.category}</p>
-                        <p class="skill-card-details"><strong>Price:</strong> $${skill.price}</p>
-                        <p class="skill-card-extra"><strong>Provider:</strong> ${skill.provider}</p>
-                        <p class="skill-card-extra">${skill.description}</p>
-                    </div>
-                </article>`);
-        });
-    }
-
 //#region Filter Skills Code
 let skillCardContainer = document.getElementById("offerings-grid");
 
@@ -113,6 +95,10 @@ document.getElementById("match-results-button").addEventListener("click",() => {
 })    
 //#endregion
 
+//#region Offer Skills Section Code
+
+//#endregion
+
 async function loadSkills() {
     try {
         skillList = await window.apiService.fetchSkills();
@@ -121,4 +107,22 @@ async function loadSkills() {
         console.error("Failed to load skills: ", error);
         alert("Failed to load skills. Please make sure the server is running.")
     }
+}
+
+async function displaySkills(container, skillArray) {
+    container.innerHTML = "";
+
+    skillArray.forEach((skill) => {
+    container.insertAdjacentHTML("beforeend",
+        `<article class="skill-card" tabindex="0">
+                <button class="skill-card-collapse" type="button" aria-label="Hide offering">&minus;</button>
+                <div class="skill-card-content" id="${skill.provider}-${skill.title}">
+                    <h3>${skill.title}</h3>
+                    <p class="skill-card-details"><strong>Category:</strong> ${skill.category}</p>
+                    <p class="skill-card-details"><strong>Price:</strong> $${skill.price}</p>
+                    <p class="skill-card-extra"><strong>Provider:</strong> ${skill.provider}</p>
+                    <p class="skill-card-extra">${skill.description}</p>
+                </div>
+            </article>`);
+    });
 }

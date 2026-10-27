@@ -256,14 +256,17 @@ main {
 .cost-calculator {
 	border-top: 1px solid var(--line);
 	background: #e8f1e8;
+}
 
+.cost-calculator,
+.offer-skills {
 	form,
 	.match-filter-controls {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: flex-end;
 		gap: 16px;
-		max-width: 760px;
+		max-width: 1000px;
 		margin-top: 28px;
 
 		> div {
@@ -275,7 +278,8 @@ main {
 		}
 
 		input,
-		select {
+		select,
+		textarea {
 			min-height: 44px;
 			padding: 8px 12px;
 			border: 2px solid var(--line);
@@ -313,7 +317,9 @@ main {
 			}
 		}
 	}
+}
 
+.cost-calculator {
 	.match-results {
 		max-width: 760px;
 		margin-top: 24px;
@@ -344,6 +350,7 @@ main {
 				outline-offset: 3px;
 			}
 		}
+
 	}
 
 	.match-results-content {
@@ -396,6 +403,17 @@ main {
 			font-size: 18px;
 			font-weight: 700;
 		}
+	}
+}
+
+.offer-skills {
+	.offer-description-field {
+		flex: 1 1 100%;
+	}
+
+	textarea {
+		width: 100%;
+		resize: vertical;
 	}
 }
 
