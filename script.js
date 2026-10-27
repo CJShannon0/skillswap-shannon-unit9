@@ -96,12 +96,14 @@ document.getElementById("match-results-button").addEventListener("click",() => {
 //#endregion
 
 //#region Offer Skills Section Code
-
+document.getElementById("create-skill-button").addEventListener("click", createSkillButton);
 //#endregion
 
 async function loadSkills() {
     try {
+        console.log("Skills being loaded...");
         skillList = await window.apiService.fetchSkills();
+        console.log("Skills successfully loaded.");
     }
     catch(error) {
         console.error("Failed to load skills: ", error);
@@ -110,6 +112,7 @@ async function loadSkills() {
 }
 
 async function displaySkills(container, skillArray) {
+    console.log(container.toString() + "is loading skills...");
     container.innerHTML = "";
 
     skillArray.forEach((skill) => {
@@ -125,4 +128,20 @@ async function displaySkills(container, skillArray) {
                 </div>
             </article>`);
     });
+    console.log("Skills successfully displayed.");
+}
+
+async function createSkillButton() {
+    let newSkill = {
+        title: document.getElementById("offer-skill-title").value,
+        description: document.getElementById("offer-skill-description").value,
+        category: document.getElementById("offer-skill-category").value,
+        price: document.getElementById("offer-skill-price").value,
+        provider: document.getElementById("offer-skill-provider").value
+    }
+    await createSkill(newSkill);
+    alert("Skill successfully created.")
+
+    await loadSkills();
+    displaySkills(skillCardContainer, skillList);
 }
